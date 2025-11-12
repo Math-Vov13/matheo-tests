@@ -41,11 +41,13 @@ L’objectif est d’améliorer la qualité du code et la couverture de tests à
 ## Démarrage rapide
 
 Variables d'environnement
+
 ```sh
 cp .env.example .env
 ```
 
 Installation et lancement du serveur
+
 ```sh
 npm install # installer les packages
 npm run dev # lancer le serveur (avec nodemon)
@@ -54,18 +56,23 @@ npm run dev # lancer le serveur (avec nodemon)
 - Accès à la documentation Swagger : `/api-docs`
 
 ### Codebase écriture
+
 Linter:
+
 ```sh
 npm run lint
 ```
 
 Formatage:
+
 ```sh
 npm run format
 ```
 
 ### Tests
+
 Lancer les tests
+
 ```sh
 npm run test
 # ou
@@ -73,6 +80,7 @@ npm run test:coverage
 ```
 
 Lancer l'analyse de script Codacy ([avec clé API](https://www.codacy.com/signup-codacy))
+
 ```sh
 export CODACY_PROJECT_TOKEN="your-token-here" # Linux/Macos - bash
 # ou
