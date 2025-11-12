@@ -26,7 +26,7 @@ describe('Student-Course API integration', () => {
     const res = await request(app)
       .post('/students')
       .send({ name: 'Eve', email: 'alice@example.com' });
-    expect(res.statusCode).toBe(201);
+    expect(res.statusCode).toBe(400);
   });
 
   test('DELETE /courses/:id should delete a course even if students are enrolled', async () => {

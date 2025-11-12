@@ -27,29 +27,58 @@ L’objectif est d’améliorer la qualité du code et la couverture de tests à
 
 ## À faire
 
-- Corriger et compléter les tests existants.
-- Ajouter de nouveaux tests pour améliorer la couverture.
-- Mettre en place ESLint et Prettier.
-- Intégrer la vérification de qualité et les tests dans la CI.
-- Finaliser la documentation Swagger.
-- Intégrer Codacy comme outil d’analyse statique
-- Ajouter un template de Pull Request (.github/pull_request_template.md).
-- Produire une Pull Request bien documentée avec des messages de commits pertinents.
-- Rédiger une documentation technique complète (Markdown ou générateur).
-- Fournir un dépôt Git propre, lisible et bien organisé.
+- [ X ] Corriger et compléter les tests existants.
+- [ ] Ajouter de nouveaux tests pour améliorer la couverture.
+- [ X ] Mettre en place ESLint et Prettier.
+- [ ] Intégrer la vérification de qualité et les tests dans la CI.
+- [ X ] Finaliser la documentation Swagger.
+- [ X ] Intégrer Codacy comme outil d’analyse statique
+- [ ] Ajouter un template de Pull Request (.github/pull_request_template.md).
+- [ ] Produire une Pull Request bien documentée avec des messages de commits pertinents.
+- [ ] Rédiger une documentation technique complète (Markdown ou générateur).
+- [ X ] Fournir un dépôt Git propre, lisible et bien organisé.
 
 ## Démarrage rapide
 
 ```sh
-npm install
-npm run dev
+npm install # installer les packages
+npm run dev # lancer le serveur (avec nodemon)
 ```
 
 - Accès à la documentation Swagger : `/api-docs`
-- Lancer les tests : `npm test`
-- Linter : `npm run lint`
-- Formatage : `npm run format`
+
+### Codebase écriture
+Linter:
+```sh
+npm run lint
+```
+
+Formatage:
+```sh
+npm run format
+```
+
+### Tests
+Lancer les tests
+```sh
+npm run test
+# ou
+npm run test:coverage
+```
+
+Lancer l'analyse de script Codacy ([avec clé API](https://www.codacy.com/signup-codacy))
+```sh
+export CODACY_PROJECT_TOKEN="your-token-here" # Linux/Macos - bash
+# ou
+$env:CODACY_PROJECT_TOKEN = "your-token-here" # Windows - Powershell
+
+npm run report:codacy
+```
 
 ---
 
-**À vous de jouer pour améliorer la qualité et la fiabilité du projet !**
+### liens
+
+- https://formation-web-33.fr/configurer-eslint-et-prettier-pour-un-code-propre-en-javascript/
+- https://medium.com/@im_AnkitTiwari/swaggerizing-your-node-js-rest-api-a-step-by-step-guide-267255bf8bbe
+- https://app.codacy.com/gh/Math-Vov13/matheo-tests/settings/integrations

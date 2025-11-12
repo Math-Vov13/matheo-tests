@@ -7,8 +7,11 @@
     "start": "node src/app.js",
     "dev": "nodemon src/app.js",
     "test": "jest --runInBand",
-    "lint": "eslint . --ext .js",
-    "format": "prettier --write ."
+    "test:coverage": "jest --coverage --runInBand",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "docs": "node scripts/generate-swagger.js",
+    "report:codacy": "pnpm test:coverage && codacy-coverage < coverage/lcov.info"
   },
   "author": "EL AMRANI Amine",
   "license": "MIT",
@@ -19,9 +22,14 @@
     "yamljs": "^0.3.0"
   },
   "devDependencies": {
-    "eslint": "^8.35.0",
+    "@eslint/js": "^9.39.1",
+    "codacy-coverage": "^3.4.0",
+    "eslint": "^9.39.1",
     "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-prettier": "^5.5.4",
+    "globals": "^16.5.0",
     "jest": "^29.5.0",
     "nodemon": "^3.1.10",
     "prettier": "^2.8.8",

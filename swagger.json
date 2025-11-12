@@ -6,15 +6,32 @@
     "description": "API pédagogique pour gérer étudiants et cours (no DB)"
   },
   "tags": [
-    { "name": "Courses", "description": "Gestion des cours" }
+    {
+      "name": "Students",
+      "description": "Opérations liées à la gestion des étudiants"
+    },
+    {
+      "name": "Courses",
+      "description": "Opérations liées à la gestion des cours"
+    },
+    {
+      "name": "Enrollment",
+      "description": "Inscription ou désinscription des étudiants dans les cours"
+    }
   ],
   "paths": {
     "/courses": {
-      "get": { 
-        "tags": ["Courses"], 
-        "summary": "Liste des cours", 
-        "responses": { "200": { "description": "OK" } } },
+      "get": {
+        "tags": ["Courses"],
+        "summary": "Liste des cours",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
       "post": {
+        "tags": ["Courses"],
         "summary": "Créer un cours",
         "requestBody": {
           "required": true,
@@ -22,36 +39,347 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "properties": { "title": { "type": "string" }, "teacher": { "type": "string" } },
+                "properties": {
+                  "title": {
+                    "type": "string"
+                  },
+                  "teacher": {
+                    "type": "string"
+                  }
+                },
                 "required": ["title", "teacher"]
               }
             }
           }
         },
         "responses": {
-          "201": { "description": "Créé" },
-          "400": { "description": "Paramètres invalides" }
+          "201": {
+            "description": "Créé"
+          },
+          "400": {
+            "description": "Paramètres invalides"
+          }
         }
       }
     },
     "/courses/{id}": {
       "get": {
+        "tags": ["Courses"],
         "summary": "Récupérer un cours",
         "parameters": [
-          { "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }
-        ],
-        "responses": { "200": { "description": "OK" }, "404": { "description": "Non trouvé" } }
-      },
-      "delete": {
-        "summary": "Supprimer un cours",
-        "parameters": [
-          { "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
         ],
         "responses": {
-          "204": { "description": "Supprimé" },
-          "404": { "description": "Non trouvé" }
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Non trouvé"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Courses"],
+        "summary": "Supprimer un cours",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Supprimé"
+          },
+          "404": {
+            "description": "Non trouvé"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Courses"],
+        "summary": "Mettre à jour un cours",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string"
+                  },
+                  "teacher": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Cours mis à jour"
+          },
+          "400": {
+            "description": "Paramètres invalides"
+          },
+          "404": {
+            "description": "Cours introuvable"
+          }
+        }
+      }
+    },
+    "/students": {
+      "get": {
+        "tags": ["Students"],
+        "summary": "Lister les étudiants",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "name",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filtrer par nom"
+          },
+          {
+            "in": "query",
+            "name": "email",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filtrer par email"
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "description": "Index de page (par défaut 1)"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "description": "Taille de page (par défaut 10)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Liste paginée des étudiants"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Students"],
+        "summary": "Créer un étudiant",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  }
+                },
+                "required": ["name", "email"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Étudiant créé"
+          },
+          "400": {
+            "description": "Paramètres invalides"
+          }
+        }
+      }
+    },
+    "/students/{id}": {
+      "get": {
+        "tags": ["Students"],
+        "summary": "Récupérer un étudiant",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Étudiant trouvé"
+          },
+          "404": {
+            "description": "Étudiant introuvable"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Students"],
+        "summary": "Supprimer un étudiant",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Étudiant supprimé"
+          },
+          "404": {
+            "description": "Étudiant introuvable"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Students"],
+        "summary": "Mettre à jour un étudiant",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Étudiant mis à jour"
+          },
+          "400": {
+            "description": "Paramètres invalides"
+          },
+          "404": {
+            "description": "Étudiant introuvable"
+          }
+        }
+      }
+    },
+    "/courses/{courseId}/students/{studentId}": {
+      "post": {
+        "tags": ["Enrollment"],
+        "summary": "Inscrire un étudiant à un cours",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "courseId",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "path",
+            "name": "studentId",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Étudiant inscrit"
+          },
+          "400": {
+            "description": "Erreur lors de l'inscription"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Enrollment"],
+        "summary": "Désinscrire un étudiant d'un cours",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "courseId",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "path",
+            "name": "studentId",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Étudiant désinscrit"
+          },
+          "404": {
+            "description": "Étudiant ou cours introuvable"
+          }
         }
       }
     }
-  }
+  },
+  "components": {}
 }

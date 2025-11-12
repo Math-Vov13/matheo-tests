@@ -1,35 +1,44 @@
-const express=require('express');
-const swaggerUi=require('swagger-ui-express');
-
-const x=require('./routes/students');	const y=require('./routes/courses');
-
-const z=require('../swagger.json');		const app=express();	app.use(express.json());
-
+const express = require('express');
+const path = require('path');
+const swaggerUi = require('swagger-ui-express');
 const swaggerJSDoc = require('swagger-jsdoc');
+
+const studentRoutes = require('./routes/students');
+const courseRoutes = require('./routes/courses');
+
 const swaggerDefinition = require('../swaggerDef');
+const app = express();
+app.use(express.json());
 
-const options = {
-  swaggerDefinition,
-  apis: ['./src/controllers/*.js'], // Chemin vers les fichiers avec les commentaires JSDoc
-};
+const swaggerSpec = swaggerJSDoc({
+  definition: swaggerDefinition,
+  apis: [path.join(__dirname, 'controllers/*.js'), path.join(__dirname, 'routes/*.js')],
+});
 
-const swaggerSpec = swaggerJSDoc(options);
-app.use('/api-docs',swaggerUi.serve,swaggerUi.setup(z));
-
-//app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 const storage = require('./services/storage');
 
-storage.seed(); 
+storage.seed();
 
-app.use('/students',x);	app.use('/courses',y);
+app.use('/students', studentRoutes);
+app.use('/courses', courseRoutes);
 
-app.use((req,res)=>{res.status(404).json({error:'Not Found'});});
+app.use((req, res) => {
+  res.status(404).json({ error: 'Not Found' });
+});
 
-app.use((err,req,res,next)=>{console.error(err.stack);res.status(500).json({error:'Internal Server Error'});});
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: 'Internal Server Error' });
+});
 
-if(require.main===module){
-const p=process.env.PORT||3000;	app.listen(p,()=>{console.log(`Server listening on port ${p}`);});
+if (require.main === module) {
+  const p = process.env.PORT || 3000;
+  app.listen(p, () => {
+    console.log(`Server listening on http://localhost:${p}`);
+    console.log(`API docs available at http://localhost:${p}/api-docs`);
+  });
 }
 
-module.exports=app;
+module.exports = app;
