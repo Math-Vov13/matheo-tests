@@ -27,13 +27,13 @@ L’objectif est d’améliorer la qualité du code et la couverture de tests à
 
 ## À faire
 
-- [ X ] Corriger et compléter les tests existants.
-- [ X ] Ajouter de nouveaux tests pour améliorer la couverture.
-- [ X ] Mettre en place ESLint et Prettier.
-- [ X ] Intégrer la vérification de qualité et les tests dans la CI.
-- [ X ] Finaliser la documentation Swagger.
-- [ X ] Intégrer Codacy comme outil d’analyse statique
-- [ x ] Ajouter un template de Pull Request (.github/pull_request_template.md).
-- [ ] Produire une Pull Request bien documentée avec des messages de commits pertinents.
+- [x] Corriger et compléter les tests existants.
+- [x] Ajouter de nouveaux tests pour améliorer la couverture.
+- [x] Mettre en place ESLint et Prettier.
+- [x] Intégrer la vérification de qualité et les tests dans la CI.
+- [x] Finaliser la documentation Swagger.
+- [x] Intégrer Codacy comme outil d’analyse statique
+- [x] Ajouter un template de Pull Request (.github/pull_request_template.md).
+- [x] Produire une Pull Request bien documentée avec des messages de commits pertinents.
 - [x] Rédiger une documentation technique complète (Markdown ou générateur).
 - [x] Fournir un dépôt Git propre, lisible et bien organisé.
