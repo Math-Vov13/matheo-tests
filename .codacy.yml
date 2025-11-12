@@ -1,0 +1,16 @@
+# .codacy.yml
+engines:
+  pmd:
+    enabled: false
+  pmd-legacy:
+    enabled: false
+  eslint:
+    enabled: true
+    patterns:
+      - '**/*.js'
+  eslint-security:
+    enabled: true
+
+exclude_paths:
+  - node_modules/**
+  - dist/**
