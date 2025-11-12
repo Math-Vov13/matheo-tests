@@ -24,19 +24,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: pnpm
-          cache-dependency-path: pnpm-lock.yaml
-
-      - name: Enable pnpm
-        run: |
-          corepack enable
-          corepack prepare pnpm@9 --activate
+          cache: npm
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: npm install
 
       - name: Lint
-        run: pnpm lint
+        run: npm run lint
 
   test:
     needs: lint
@@ -53,24 +47,18 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: pnpm
-          cache-dependency-path: pnpm-lock.yaml
-
-      - name: Enable pnpm
-        run: |
-          corepack enable
-          corepack prepare pnpm@9 --activate
+          cache: npm
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: npm install
 
       - name: Run tests
         if: matrix.node-version != '20'
-        run: pnpm test
+        run: npm test
 
       - name: Run coverage
         if: matrix.node-version == '20'
-        run: pnpm test:coverage
+        run: npm run test:coverage
 
       - name: Upload coverage artifact
         if: matrix.node-version == '20'
