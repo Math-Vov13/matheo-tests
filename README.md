@@ -40,6 +40,12 @@ L’objectif est d’améliorer la qualité du code et la couverture de tests à
 
 ## Démarrage rapide
 
+Variables d'environnement
+```sh
+cp .env.example .env
+```
+
+Installation et lancement du serveur
 ```sh
 npm install # installer les packages
 npm run dev # lancer le serveur (avec nodemon)
