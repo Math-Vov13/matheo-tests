@@ -11,7 +11,8 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "docs": "node scripts/generate-swagger.js",
-    "report:codacy": "npm run test:coverage && codacy-coverage < coverage/lcov.info"
+    "report:codacy": "npm run test:coverage && codacy-coverage < coverage/lcov.info",
+    "prepare": "husky"
   },
   "husky": {
     "hooks": {

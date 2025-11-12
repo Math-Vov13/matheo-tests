@@ -53,3 +53,22 @@ test('should allow more than 3 students in a course', () => {
   const result = storage.enroll(4, course.id);
   expect(result.success).toBe(true);
 });
+
+test('should allow deleting course with enrolled students (cascade)', () => {
+  const student = storage.list('students')[0];
+  const course = storage.list('courses')[0];
+  storage.enroll(student.id, course.id);
+  const result = storage.remove('courses', course.id);
+  expect(result).toBe(true);
+  expect(storage.list('courses').length).toBe(2);
+});
+
+test('should return false when deleting non-existent student', () => {
+  const result = storage.remove('students', 999);
+  expect(result).toBe(false);
+});
+
+test('should return false when deleting non-existent course', () => {
+  const result = storage.remove('courses', 999);
+  expect(result).toBe(false);
+});

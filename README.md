@@ -14,6 +14,7 @@ L’objectif est d’améliorer la qualité du code et la couverture de tests à
 - API REST documentée avec Swagger.
 
 ## Technologies 🔨
+
 - Nodejs / Javascript
 - Expressjs (API Rest)
 - Jest / Supertest (tests)
@@ -24,6 +25,7 @@ L’objectif est d’améliorer la qualité du code et la couverture de tests à
 Dans ce projet, j'utilises [pnpm](https://pnpm.io/) comme installateur de packages. Pour une installer simplifier, je conseil de l'installer !
 
 1. Installer les dépendances
+
 ```sh
 npm install
 # ou
@@ -37,6 +39,7 @@ cp .env.example .env # copier
 ```
 
 puis rentrez votre clé API:
+
 ```sh
 # API
 PORT=3000
@@ -54,11 +57,25 @@ pnpm dev
 ```
 
 ## Ressources 📚
+
 ### Chemins API
+
 Base de l'API http://localhost:3000
+
 1. Documentation Swagger `/api-docs`
 2. Cours `/courses`
+
+- `/` (GET / POST)
+- `/{courseId}` (GET / PUT / DELETE)
+
 3. Elèves `/students`
+
+- `/` (GET / POST)
+- `/{studentId}` (GET / PUT / DELETE)
+
+4. Inscription `/courses/{courseId}/students/{studentId}` (POST / DELETE)
+
+pour plus d'informations, se référer à la docs Swagger (auto-générée) [ici](./swagger.json)
 
 ### Formatage du code et linter
 
@@ -94,6 +111,21 @@ $env:CODACY_PROJECT_TOKEN = "your-token-here" # Windows - Powershell
 npm run report:codacy
 ```
 
+### Pipelines
+
+**Pre-commit**:
+
+```sh
+npm run husky
+```
+
+Husky se chargera de faire les tests en local avant de commit les changements sur Github. Plus pratique et plus sûr 😉
+
+**Github Actions**:
+
+- Effectuer les [tests](./.github/workflows/ci.yml)
+- Effectuer les [tests codacy](./.github/workflows/codacy.yml)
+
 ---
 
 ### liens utile
@@ -101,6 +133,8 @@ npm run report:codacy
 - **Eslint & prettier :** https://formation-web-33.fr/configurer-eslint-et-prettier-pour-un-code-propre-en-javascript/
 - **Auto-Swagger :** https://medium.com/@im_AnkitTiwari/swaggerizing-your-node-js-rest-api-a-step-by-step-guide-267255bf8bbe
 - **Codacy :** https://app.codacy.com/gh/Math-Vov13/matheo-tests/settings/integrations
+- **Husky :** https://typicode.github.io/husky/
 
 ## Auteur
+
 - Mathéo Vovard
